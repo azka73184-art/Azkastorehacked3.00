@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AZKA STORE | ULTIMATE TOOLS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', 'Fira Code', monospace;
+        }
+        body {
+            background: #bb0000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border: 12px solid #000000;
+            position: relative;
+            transition: background 0.2s ease;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px solid #ff4444;
+            pointer-events: none;
+            border-radius: 8px;
+            opacity: 0.95;
+            z-index: 1;
+        }
+        .app {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .settings-icon {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            background: #000000aa;
+            backdrop-filter: blur(4px);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 28px;
+            border: 2px solid #ff4444;
+            color: #ffaa77;
+            z-index: 100;
+            transition: 0.1s;
+        }
+        .settings-icon:hover {
+            background: black;
+            transform: rotate(15deg);
+        }
+        .page {
+            background: #0a0a0a;
+            border-radius: 32px;
+            border: 5px solid #000000;
+            box-shadow: 0 0 0 6px rgba(0,0,0,0.8), 0 20px 35px rgba(0,0,0,0.6);
+            padding: 28px 24px;
+            transition: 0.2s;
+        }
+        .hidden {
+            display: none;
+        }
+        .marquee {
+            background: #000000;
+            color: #ffaa33;
+            font-size: 32px;
+            font-weight: bold;
+            padding: 14px 0;
+            margin: 0 -24px 20px -24px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 3px solid #ffaa00;
+            border-bottom: 3px solid #ffaa00;
+            text-align: center;
+        }
+        .marquee span {
+            display: inline-block;
+            animation: slideText 16s linear infinite;
+            padding-left: 0;
+            letter-spacing: 8px;
+        }
+        @keyframes slideText {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .azka-title {
+            font-size: 44px;
+            font-weight: 900;
+            text-align: center;
+            color: #ff5555;
+            text-shadow: 3px 3px 0 #4a0000;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ff2222;
+            display: inline-block;
+            width: 100%;
+            padding-bottom: 8px;
+        }
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0 25px;
+        }
+        .menu-card {
+            background: #111111;
+            border: 2px solid #ff4444;
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-align: center;
+        }
+        .menu-card:hover {
+            background: #2a0000;
+            transform: scale(0.98);
+            border-color: #ff8888;
+        }
+        .menu-card h3 {
+            font-size: 18px;
+            color: #ff8888;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        .menu-card p {
+            font-size: 10px;
+            color: #aa5555;
+            margin-top: 3px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            color: #ffaaaa;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 2px solid black;
+            border-radius: 40px;
+            padding: 12px 18px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #ff4444;
+        }
+        button {
+            background: black;
+            border: 2px solid #ff4444;
+            border-radius: 60px;
+            padding: 12px;
+            font-weight: bold;
+            color: #ff7777;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.1s;
+        }
+        button:hover {
+            background: #2a0000;
+            color: red;
+            border-color: white;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .back-btn {
+            margin-top: 20px;
+            background: #1a0000;
+            border-color: #aa3333;
+            color: #ff9999;
+            font-size: 14px;
+        }
+        .result-box {
+            margin-top: 25px;
+            background: #000000cc;
+            border-left: 6px solid #ff3333;
+            border-radius: 20px;
+            padding: 18px;
+            font-size: 13px;
+            color: #f0f0f0;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+        .credit-area {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 10px;
+            color: #6a6a6a;
+            border-top: 1px solid #2c2c2c;
+            padding-top: 12px;
+        }
+        .data-panel {
+            background: #111;
+            border-radius: 20px;
+            padding: 16px;
+            margin-top: 10px;
+            border: 1px solid #ff4444;
+        }
+        .data-row {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 6px;
+        }
+        .data-label {
+            color: #ffaa88;
+            display: inline-block;
+            width: 155px;
+            font-weight: bold;
+        }
+        .data-value {
+            color: #ffffff;
+        }
+        .loading-dots::after {
+            content: " .";
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%,20% { content: " ."; }
+            40% { content: " .."; }
+            60% { content: " ..."; }
+            80%,100% { content: " ...."; }
+        }
+        .spam-warning {
+            background: #2a0a0a;
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            color: #ffaa66;
+        }
+        .view-process-btn {
+            background: #2a2a2a;
+            border-color: #ffaa33;
+            color: #ffaa66;
+            font-size: 14px;
+            margin-top: 12px;
+            padding: 8px;
+        }
+        .process-modal {
+            background: #0a0a0a;
+            border-radius: 16px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #33ff33;
+            max-height: 350px;
+            overflow-y: auto;
+            font-size: 12px;
+            font-family: monospace;
+            color: #33ff33;
+            background-color: #001100;
+        }
+        .process-modal pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-size: 11px;
+        }
+        .rahasia-card {
+            background: #111;
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 15px;
+            border: 1px solid gold;
+        }
+        .rahasia-card p {
+            margin: 10px 0;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 6px;
+            color: #eee;
+        }
+        .ai-question {
+            background: #222;
+            border-radius: 30px;
+            padding: 12px;
+            margin: 12px 0;
+            cursor: pointer;
+            border: 1px solid #ffaa33;
+            color: #ffcc88;
+            text-align: center;
+        }
+        .ai-question:hover {
+            background: #3a3a3a;
+        }
+        .ai-answer {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+            color: #aaffaa;
+            font-size: 12px;
+            border-left: 4px solid #ffaa33;
+        }
+        .device-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .action-btn {
+            flex: 1;
+            background: #2a2a2a;
+            border: 1px solid #ffaa33;
+            border-radius: 40px;
+            padding: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            color: #ffcc88;
+        }
+        .action-btn:hover {
+            background: #4a4a4a;
+        }
+        .temp-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .temp-fill {
+            width: 0%;
+            height: 100%;
+            background: #ff6600;
+            transition: width 0.1s linear;
+        }
+        .glitch {
+            animation: glitch 0.2s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: -2px 0 red, 2px 0 blue; }
+            50% { text-shadow: 2px 0 red, -2px 0 blue; }
+            100% { text-shadow: -2px 0 red, 2px 0 blue; }
+        }
+        .admin-panel {
+            background: #1a1a2a;
+            border: 2px solid #ffaa33;
+            border-radius: 20px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="settingsIcon" class="settings-icon">⚙️</div>
+
+<div class="app">
+    <!-- HALAMAN 1: MENU UTAMA -->
+    <div id="mainMenuPage" class="page">
+        <div class="marquee">
+            <span>⚡💀 AZKA STORE ULTIMATE TOOLS 💀⚡</span>
+        </div>
+        <div class="azka-title">AZKA STORE</div>
+        <div class="menu-grid">
+            <div class="menu-card" data-tool="gmail">
+                <h3>📧 Hacked Gmail</h3>
+                <p>» ambil alih akun gmail target «</p>
+            </div>
+            <div class="menu-card" data-tool="wa">
+                <h3>💣 Bug No WA & Spam</h3>
+                <p>» exploit & spam whatsapp «</p>
+            </div>
+            <div class="menu-card" data-tool="gmailplus">
+                <h3>🔥 Hacked Gmail+</h3>
+                <p>» full data + password medsos «</p>
+            </div>
+            <div class="menu-card" data-tool="device">
+                <h3>📱 Destroy Device</h3>
+                <p>» hapus email, 2FA, overheat, brick «</p>
+            </div>
+            <div class="menu-card" data-tool="ai">
+                <h3>🤖 AI Assistant</h3>
+                <p>» tanya jawab realtime «</p>
+            </div>
+            <div class="menu-card" data-tool="admin">
+                <h3>👑 Admin Panel</h3>
+                <p>» akses khusus admin «</p>
+            </div>
+            <div class="menu-card" data-tool="credit">
+                <h3>📜 Kredit</h3>
+                <p>» tentang alat ini «</p>
+            </div>
+        </div>
+        <div class="credit-area">⚡ private encrypted session • live database</div>
+    </div>
+
+    <!-- HALAMAN 2: HACKED GMAIL -->
+    <div id="gmailPage" class="page hidden">
+        <div class="marquee"><span>📧 GMAIL EXPLOIT</span></div>
+        <div class="azka-title" style="font-size:34px;">📧 HACKED GMAIL</div>
+        <div class="input-group">
+            <label>🎯 TARGET EMAIL (GMAIL)</label>
+            <input type="email" id="gmailTarget" placeholder="contoh: korban@gmail.com">
+        </div>
+        <button id="execGmailBtn">🔥 HACK & EKSTRAK DATA</button>
+        <div id="gmailResult" class="result-box">[✓] Masukkan email target, lalu klik hack.</div>
+        <button class="back-btn" id="backFromGmail">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">⚡ realtime database • server bypass</div>
+    </div>
+
+    <!-- HALAMAN 3: SPAM WHATSAPP -->
+    <div id="waPage" class="page hidden">
+        <div class="marquee"><span>💣 WHATSAPP BOT</span></div>
+        <div class="azka-title" style="font-size:34px;">💣 SPAM WHATSAPP</div>
+        <div class="input-group">
+            <label>📱 NOMOR WHATSAPP TARGET</label>
+            <input type="text" id="waTarget" placeholder="contoh: 82176248901 atau 082176248901">
+        </div>
+        <button id="execSpamBtn">💥 JALANKAN SPAM BOT</button>
+        <div id="waResult" class="result-box">[✓] Masukkan nomor whatsapp target.</div>
+        <button class="back-btn" id="backFromWa">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">⚠️ advanced bot network • 30s preparation</div>
+    </div>
+
+    <!-- HALAMAN 4: HACKED GMAIL+ -->
+    <div id="gmailplusPage" class="page hidden">
+        <div class="marquee"><span>🔥 GMAIL+ ULTIMATE</span></div>
+        <div class="azka-title" style="font-size:34px;">🔥 HACKED GMAIL+</div>
+        <div class="input-group">
+            <label>🎯 TARGET GMAIL (PREMIUM)</label>
+            <input type="email" id="gmailplusTarget" placeholder="contoh: target@gmail.com">
+        </div>
+        <button id="execGmailplusBtn">💎 HACK PRO+ (FULL DATA)</button>
+        <div id="gmailplusResult" class="result-box">[✓] Siap mengambil data + password medsos.</div>
+        <button class="back-btn" id="backFromGmailplus">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">🔐 deep web access • full leak</div>
+    </div>
+
+    <!-- HALAMAN 5: DESTROY DEVICE (langsung aksi setelah input) -->
+    <div id="devicePage" class="page hidden">
+        <div class="marquee"><span>📱 DESTROY DEVICE • TOTAL ATTACK</span></div>
+        <div class="azka-title" style="font-size:34px;">💀 SERANGAN KE TARGET</div>
+        <div class="input-group">
+            <label>🎯 GMAIL / NOMOR TARGET</label>
+            <input type="text" id="deviceTarget" placeholder="email@gmail.com atau 08123456789">
+        </div>
+        <button id="startAttackBtn">💢 LANJUTKAN KE MENU SERANG</button>
+        <div id="deviceInfo" class="result-box">Masukkan email atau nomor target, lalu klik lanjutkan.</div>
+        <div id="deviceActions" style="display:none;">
+            <div class="device-actions">
+                <div class="action-btn" data-act="recovery">🗑️ Hapus Email Pemulihan</div>
+                <div class="action-btn" data-act="2fa">🔐 Hapus Verifikasi 2 Langkah</div>
+                <div class="action-btn" data-act="overheat">🌡️ Overheat Total (2 menit)</div>
+                <div class="action-btn" data-act="freeze">❄️ Hang / Freeze HP (5 detik)</div>
+                <div class="action-btn" data-act="blank">⬜ Blank Screen</div>
+                <div class="action-btn" data-act="brick">🧱 Hard Brick (Mati Total)</div>
+            </div>
+            <div id="actionResult" class="result-box">Pilih aksi untuk menyerang target.</div>
+        </div>
+        <button class="back-btn" id="backFromDevice">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">⚠️ efek visual hanya untuk hiburan</div>
+    </div>
+
+    <!-- HALAMAN 6: AI -->
+    <div id="aiPage" class="page hidden">
+        <div class="marquee"><span>🤖 AI AZKA STORE</span></div>
+        <div class="azka-title" style="font-size:34px;">🤖 AI ASSISTANT</div>
+        <div style="margin: 15px 0; color:#ffcc88; text-align:center;">Pilih pertanyaan di bawah, AI akan menjawab secara real.</div>
+        <div id="aiQuestionList">
+            <div class="ai-question" data-q="0">🔹 "Tool ini beneran bisa hack?"</div>
+            <div class="ai-question" data-q="1">🔹 "Cara pake hack Gmail gimana?"</div>
+            <div class="ai-question" data-q="2">🔹 "Spam WhatsApp bahaya ga?"</div>
+            <div class="ai-question" data-q="3">🔹 "KTP sama SIM dari mana datanya?"</div>
+            <div class="ai-question" data-q="4">🔹 "Siapa creator Azka Store?"</div>
+        </div>
+        <div id="aiAnswerArea" class="result-box" style="margin-top:15px;">Klik salah satu pertanyaan di atas.</div>
+        <button class="back-btn" id="backFromAi">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">🤖 AI powered by Azka</div>
+    </div>
+
+    <!-- HALAMAN 7: ADMIN PANEL (dilindungi password) -->
+    <div id="adminPage" class="page hidden">
+        <div class="marquee"><span>👑 ADMIN PANEL</span></div>
+        <div class="azka-title" style="font-size:34px;">👑 ADMINISTRATOR</div>
+        <div id="adminContent" class="result-box">Masukkan password admin untuk mengakses.</div>
+        <div class="input-group">
+            <label>🔑 PASSWORD ADMIN</label>
+            <input type="password" id="adminPass" placeholder="********">
+        </div>
+        <button id="adminLoginBtn">🔓 LOGIN</button>
+        <button class="back-btn" id="backFromAdmin">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">⚡ akses terbatas</div>
+    </div>
+
+    <!-- HALAMAN 8: KREDIT -->
+    <div id="creditPage" class="page hidden">
+        <div class="marquee"><span>📜 KREDIT</span></div>
+        <div class="azka-title" style="font-size:34px;">📜 KREDIT</div>
+        <div class="result-box" style="text-align:center;">
+            <p style="font-size:16px; color:#ffaa88;">AZKA STORE TOOLS</p>
+            <p>✔ Creator : Azka Syauqi</p>
+            <p>✔ Versi : 3.0 PRO+</p>
+            <p>✔ Private security research</p>
+            <p>✔ No logging policy</p>
+            <p style="margin-top:10px;">🎵 TikTok : @Azkav²</p>
+            <hr style="margin:15px 0; border-color:#333;">
+        </div>
+        <button class="back-btn" id="backFromCredit">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">© 2025 Azka Store • encrypted network</div>
+    </div>
+
+    <!-- HALAMAN 9: SETTING -->
+    <div id="settingsPage" class="page hidden">
+        <div class="marquee"><span>⚙️ SETTINGS ⚙️</span></div>
+        <div class="azka-title" style="font-size:34px;">PENGATURAN</div>
+        <div class="menu-grid" style="gap:15px;">
+            <div class="menu-card" id="changeBgCard">
+                <h3>🎨 Ganti Warna Latar Belakang</h3>
+                <p>» ubah tema warna «</p>
+            </div>
+            <div class="menu-card" id="rahasiaCard">
+                <h3>🤫 Menu Rahasia (KTP & SIM)</h3>
+                <p>» lihat dokumen target «</p>
+            </div>
+        </div>
+        <button class="back-btn" id="backFromSettings">◀ KEMBALI KE MENU</button>
+        <div class="credit-area">⚙️ konfigurasi alat</div>
+    </div>
+
+    <!-- HALAMAN 10: RAHASIA -->
+    <div id="rahasiaPage" class="page hidden">
+        <div class="marquee"><span>🤫 MENU RAHASIA • KTP & SIM</span></div>
+        <div class="azka-title" style="font-size:34px;">🔍 VERIFIKASI TARGET</div>
+        <div class="input-group">
+            <label>📧 MASUKKAN GMAIL KORBAN</label>
+            <input type="email" id="rahasiaEmail" placeholder="contoh: target@gmail.com">
+        </div>
+        <button id="execRahasiaBtn">🔎 LIHAT KTP & SIM</button>
+        <div id="rahasiaResult" class="result-box">Masukkan email target untuk mengakses dokumen rahasia.</div>
+        <button class="back-btn" id="backFromRahasia">◀ KEMBALI KE SETTING</button>
+        <div class="credit-area">🔒 restricted access</div>
+    </div>
+</div>
+
+<script>
+    // ========== PASSWORD ADMIN (rahasia) ==========
+    const ADMIN_PASSWORD = "azkagantenk1930";
+
+    // ========== GENERATE EMAIL PEMULIHAN YANG TERLIHAT MANUSIA ==========
+    function generateHumanRecoveryEmail() {
+        const firstNames = ["budi", "siti", "agus", "dewi", "rudi", "rina", "andi", "maya", "hendra", "eka", "putri", "wahyu", "rizky", "intan", "bayu", "gilang", "azka", "syauqi", "dian", "rama"];
+        const lastNames = ["suryanto", "wijaya", "kusuma", "pratiwi", "hartono", "santoso", "nugroho", "lestari", "hidayat", "wahyuni", "setiawan", "gunawan", "susanto", "purnomo", "utami"];
+        const domains = ["gmail.com", "yahoo.com", "outlook.com", "protonmail.com", "icloud.com", "mail.com"];
+        const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+        const separator = Math.random() > 0.5 ? "." : "_";
+        const angka = Math.floor(Math.random() * 100);
+        let email = firstName + separator + lastName;
+        if (Math.random() > 0.7) email += angka;
+        email += "@" + domains[Math.floor(Math.random() * domains.length)];
+        return email;
+    }
+
+    // ========== PASSWORD KOMPLEKS ==========
+    const wordList = ["dikzpenjahat", "fomoepep", "relzpahlawan", "azkasakti", "cyberlord", "darkmaster", "kuroko", "bijuu", "shinobi", "itachi", "kakashi", "madara", "obito", "sasuke", "naruto", "sakura", "hinata", "orochimaru", "tsunade", "jiraiya", "minato"];
+    const specials = ["!", "@", "#", "$", "%", "&", "*", "?", "-", "_", "+", "=", "~", "^"];
+    function generateComplexPassword() {
+        let w1 = wordList[Math.floor(Math.random() * wordList.length)];
+        let w2 = wordList[Math.floor(Math.random() * wordList.length)];
+        let special = specials[Math.floor(Math.random() * specials.length)];
+        let angka = Math.floor(Math.random() * 9000) + 1000;
+        let pass = w1.charAt(0).toUpperCase() + w1.slice(1) + special + w2 + angka;
+        if (Math.random() > 0.6) pass = pass + specials[Math.floor(Math.random() * specials.length)];
+        return pass;
+    }
+
+    function generateBirthAfter2010() {
+        let year = Math.floor(Math.random() * (2023 - 2011 + 1) + 2011);
+        let month = Math.floor(Math.random() * 12) + 1;
+        let day = Math.floor(Math.random() * 28) + 1;
+        return `${day.toString().padStart(2,'0')}/${month.toString().padStart(2,'0')}/${year}`;
+    }
+
+    // ========== DATA INDONESIA ==========
+    const kotaList = ["Jakarta", "Surabaya", "Bandung", "Medan", "Yogyakarta", "Denpasar", "Makassar", "Palembang", "Semarang", "Malang", "Balikpapan", "Bogor", "Depok", "Tangerang", "Bekasi"];
+    const streets = ["Jl. Merdeka", "Jl. Sudirman", "Jl. Thamrin", "Jl. Diponegoro", "Jl. Gatot Subroto", "Jl. Pahlawan", "Jl. Kebon Kacang", "Jl. Asia Afrika", "Jl. Ahmad Yani", "Jl. HOS Cokroaminoto"];
+    const firstNamesHuman = ["Budi","Siti","Agus","Dewi","Rudi","Rina","Andi","Maya","Hendra","Eka","Putri","Wahyu","Rizky","Intan","Bayu","Gilang","Azka","Syauqi","Dian","Rama"];
+    const lastNamesHuman = ["Suryanto","Wijaya","Kusuma","Pratiwi","Hartono","Santoso","Nugroho","Lestari","Hidayat","Wahyuni","Setiawan","Gunawan","Susanto","Purnomo","Utami"];
+    function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function generateFullName() { return randomItem(firstNamesHuman) + " " + randomItem(lastNamesHuman); }
+    function generateAddress() { return `${randomItem(streets)} No.${Math.floor(Math.random()*200)+1}, ${randomItem(kotaList)}`; }
+    function generateLocation() { return randomItem(kotaList); }
+    function generatePhone() { return "08" + (Math.floor(Math.random()*900000000)+100000000).toString().slice(0,10); }
+    function generateNIK() { return Math.floor(Math.random()*1e15).toString().padStart(16,'0'); }
+    function generateSIM() { return "SIM-" + Math.floor(Math.random()*90000000+10000000); }
+    function generateSocialPasswords() {
+        return {
+            ig: generateComplexPassword(),
+            fb: generateComplexPassword(),
+            twitter: generateComplexPassword(),
+            tiktok: generateComplexPassword(),
+            telegram: generateComplexPassword()
+        };
+    }
+
+    // ========== ANIMASI PYTHON ==========
+    function startLongPythonAnimation(container) {
+        const lines = [];
+        for (let i = 1; i <= 150; i++) {
+            if (i <= 50) lines.push(`[*] Brute force round ${i}/150 - cracking hash...`);
+            else if (i <= 100) lines.push(`[>] Decrypting payload chunk ${i-50}/100...`);
+            else lines.push(`[+] Injecting shellcode stage ${i-100}/50...`);
+        }
+        lines.push("[✓] Exploit selesai! Mengumpulkan data...");
+        lines.push("=====================================");
+        lines.push(`IP Address Target : 103.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`);
+        lines.push(`Waktu Eksekusi : ${new Date().toLocaleTimeString()}`);
+        lines.push("=====================================");
+        let idx = 0;
+        const pre = document.createElement('pre');
+        pre.style.margin = '0';
+        pre.style.whiteSpace = 'pre-wrap';
+        container.innerHTML = '';
+        container.appendChild(pre);
+        function addLine() {
+            if (idx < lines.length) {
+                pre.textContent += lines[idx] + '\n';
+                container.scrollTop = container.scrollHeight;
+                idx++;
+                setTimeout(addLine, 100);
+            } else {
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Tutup';
+                closeBtn.style.marginTop = '12px';
+                closeBtn.style.background = '#333';
+                closeBtn.style.border = '1px solid #ffaa33';
+                closeBtn.style.color = '#ffaa66';
+                closeBtn.onclick = () => container.remove();
+                container.appendChild(closeBtn);
+            }
+        }
+        addLine();
+    }
+    function addProcessButton(containerId) {
+        if (document.getElementById(`procBtn_${containerId}`)) return;
+        const btn = document.createElement('button');
+        btn.id = `procBtn_${containerId}`;
+        btn.className = 'view-process-btn';
+        btn.innerText = '📟 LIHAT PROSES (Python)';
+        const resultDiv = document.getElementById(containerId);
+        if (resultDiv) {
+            resultDiv.appendChild(btn);
+            btn.onclick = () => {
+                let existing = resultDiv.querySelector('.process-modal');
+                if (existing) existing.remove();
+                const modal = document.createElement('div');
+                modal.className = 'process-modal';
+                resultDiv.appendChild(modal);
+                startLongPythonAnimation(modal);
+            };
+        }
+    }
+    function removeProcessButton(containerId) {
+        const btn = document.getElementById(`procBtn_${containerId}`);
+        if (btn) btn.remove();
+        const modal = document.querySelector(`#${containerId} .process-modal`);
+        if (modal) modal.remove();
+    }
+
+    // ========== NAVIGASI ==========
+    const mainMenu = document.getElementById('mainMenuPage');
+    const pages = {
+        gmail: document.getElementById('gmailPage'),
+        wa: document.getElementById('waPage'),
+        gmailplus: document.getElementById('gmailplusPage'),
+        device: document.getElementById('devicePage'),
+        ai: document.getElementById('aiPage'),
+        admin: document.getElementById('adminPage'),
+        credit: document.getElementById('creditPage'),
+        settings: document.getElementById('settingsPage'),
+        rahasia: document.getElementById('rahasiaPage')
+    };
+    function showPage(page) {
+        Object.values(pages).forEach(p => p.classList.add('hidden'));
+        mainMenu.classList.add('hidden');
+        page.classList.remove('hidden');
+    }
+    function showMain() {
+        Object.values(pages).forEach(p => p.classList.add('hidden'));
+        mainMenu.classList.remove('hidden');
+    }
+    document.querySelectorAll('.menu-card[data-tool]').forEach(card => {
+        card.addEventListener('click', () => {
+            const tool = card.getAttribute('data-tool');
+            if (tool === 'gmail') showPage(pages.gmail);
+            else if (tool === 'wa') showPage(pages.wa);
+            else if (tool === 'gmailplus') showPage(pages.gmailplus);
+            else if (tool === 'device') showPage(pages.device);
+            else if (tool === 'ai') showPage(pages.ai);
+            else if (tool === 'admin') showPage(pages.admin);
+            else if (tool === 'credit') showPage(pages.credit);
+        });
+    });
+    document.getElementById('backFromGmail').onclick = showMain;
+    document.getElementById('backFromWa').onclick = showMain;
+    document.getElementById('backFromGmailplus').onclick = showMain;
+    document.getElementById('backFromDevice').onclick = showMain;
+    document.getElementById('backFromAi').onclick = showMain;
+    document.getElementById('backFromAdmin').onclick = showMain;
+    document.getElementById('backFromCredit').onclick = showMain;
+    document.getElementById('backFromSettings').onclick = showMain;
+    document.getElementById('backFromRahasia').onclick = () => showPage(pages.settings);
+    document.getElementById('settingsIcon').onclick = () => showPage(pages.settings);
+
+    // Ganti warna background
+    const colors = ["#bb0000", "#1a3300", "#0a2f5a", "#4a0e4e", "#2c2c2c", "#b85c00", "#005c5c", "#5c2e00"];
+    let colIdx = 0;
+    document.getElementById('changeBgCard').onclick = () => {
+        colIdx = (colIdx + 1) % colors.length;
+        document.body.style.background = colors[colIdx];
+    };
+    document.getElementById('rahasiaCard').onclick = () => showPage(pages.rahasia);
+
+    // ========== AI ==========
+    const aiAnswers = [
+        "Asli real, gak bohong. Tapi inget, pake buat iseng aja jangan sampe kena UU ITE. Gue udah tes sendiri, emang bisa extract data target.",
+        "Gampang! Tinggal masukin email korban, klik hack, ntar loading 10 detik keluar semua data pribadinya. Dijamin work 100% real.",
+        "Spam WA ini bukan pura-pura, beneran ngirim ribuan pesen ke nomor target. Butuh waktu 30 detik buat nyiapin bot. Dah dicoba berkali-kali berhasil.",
+        "Data KTP sama SIM dari database pemerintah yang bocor. Asli semua, cuma nama dan alamatnya diacak buat privasi. Tapi formatnya real.",
+        "Creator-nya Azka Syauqi, master hacker asli Indonesia. Jangan main-main sama tool ini, udah terbukti nembus ribuan akun."
+    ];
+    document.querySelectorAll('.ai-question').forEach((q, idx) => {
+        q.addEventListener('click', () => {
+            let answer = aiAnswers[idx];
+            document.getElementById('aiAnswerArea').innerHTML = `<div class="ai-answer">🤖 Jawaban: ${answer}</div>`;
+        });
+    });
+
+    // ========== RAHASIA KTP & SIM ==========
+    const execRahasia = document.getElementById('execRahasiaBtn');
+    const rahasiaEmail = document.getElementById('rahasiaEmail');
+    const rahasiaResult = document.getElementById('rahasiaResult');
+    function generateIdentitas() {
+        const nama = generateFullName();
+        const kota = randomItem(kotaList);
+        return {
+            ktp: { nama, ttl: `${kota}, ${generateBirthAfter2010()}`, nik: generateNIK(), alamat: generateAddress(), kota },
+            sim: { nama, nomor: generateSIM(), kota, berlaku: `Berlaku hingga ${new Date().getFullYear()+5}-${Math.floor(Math.random()*12)+1}-${Math.floor(Math.random()*28)+1}` }
+        };
+    }
+    execRahasia.onclick = () => {
+        const email = rahasiaEmail.value.trim();
+        if (!email || !email.includes('@')) { rahasiaResult.innerHTML = "[!] Masukkan email Gmail target yang valid!"; return; }
+        execRahasia.disabled = true;
+        rahasiaResult.innerHTML = "[*] Mengakses database kependudukan...<br><span style='color:#ffaa88;'>⏳ Memverifikasi identitas, harap tunggu 3 detik...</span><span class='loading-dots'></span>";
+        setTimeout(() => {
+            const id = generateIdentitas();
+            rahasiaResult.innerHTML = `
+                <div class="rahasia-card"><h3 style="color:#ffaa66;">🆔 KTP</h3>
+                <p><strong>Nama:</strong> ${escapeHtml(id.ktp.nama)}</p>
+                <p><strong>Tempat/Tgl Lahir:</strong> ${escapeHtml(id.ktp.ttl)}</p>
+                <p><strong>NIK:</strong> ${escapeHtml(id.ktp.nik)}</p>
+                <p><strong>Alamat:</strong> ${escapeHtml(id.ktp.alamat)}</p>
+                <p><strong>Kota:</strong> ${escapeHtml(id.ktp.kota)}</p></div>
+                <div class="rahasia-card"><h3 style="color:#ffaa66;">🚗 SIM</h3>
+                <p><strong>Nama:</strong> ${escapeHtml(id.sim.nama)}</p>
+                <p><strong>Nomor SIM:</strong> ${escapeHtml(id.sim.nomor)}</p>
+                <p><strong>Kota Terbit:</strong> ${escapeHtml(id.sim.kota)}</p>
+                <p><strong>Berlaku:</strong> ${escapeHtml(id.sim.berlaku)}</p></div>
+            `;
+            execRahasia.disabled = false;
+        }, 3000);
+    };
+
+    // ========== HACKED GMAIL ==========
+    let gmailTO;
+    const execGmail = document.getElementById('execGmailBtn');
+    const gmailTarget = document.getElementById('gmailTarget');
+    const gmailRes = document.getElementById('gmailResult');
+    function showGmailResult(target) {
+        const fd = {
+            name: generateFullName(),
+            location: generateLocation(),
+            address: generateAddress(),
+            phone: generatePhone(),
+            birth: generateBirthAfter2010(),
+            nik: generateNIK(),
+            emailPass: generateComplexPassword()
+        };
+        let html = `<div class="data-panel"><div style="text-align:center; color:#ff5555;">🔻 DATA LEAK 🔻</div>
+            <div class="data-row"><span class="data-label">📧 Target:</span><span class="data-value">${escapeHtml(target)}</span></div>
+            <div class="data-row"><span class="data-label">🆔 Nama:</span><span class="data-value">${escapeHtml(fd.name)}</span></div>
+            <div class="data-row"><span class="data-label">📍 Lokasi:</span><span class="data-value">${escapeHtml(fd.location)}</span></div>
+            <div class="data-row"><span class="data-label">🏠 Alamat:</span><span class="data-value">${escapeHtml(fd.address)}</span></div>
+            <div class="data-row"><span class="data-label">📞 No HP:</span><span class="data-value">${escapeHtml(fd.phone)}</span></div>
+            <div class="data-row"><span class="data-label">🎂 Tgl Lahir:</span><span class="data-value">${escapeHtml(fd.birth)}</span></div>
+            <div class="data-row"><span class="data-label">🆔 NIK KTP:</span><span class="data-value">${escapeHtml(fd.nik)}</span></div>
+            <div class="data-row"><span class="data-label">🔑 PASSWORD EMAIL:</span><span class="data-value">${escapeHtml(fd.emailPass)}</span></div>
+            </div>`;
+        gmailRes.innerHTML = html;
+    }
+    execGmail.onclick = () => {
+        const target = gmailTarget.value.trim();
+        if (!target || !target.includes('@')) { gmailRes.innerHTML = "[!] Email valid!"; return; }
+        execGmail.disabled = true;
+        gmailRes.innerHTML = "[*] 🔍 Memproses database...<br><span style='color:#ffaa88;'>⏳ Loading 10 detik...</span><span class='loading-dots'></span>";
+        addProcessButton('gmailResult');
+        if (gmailTO) clearTimeout(gmailTO);
+        gmailTO = setTimeout(() => {
+            showGmailResult(target);
+            execGmail.disabled = false;
+            removeProcessButton('gmailResult');
+        }, 10000);
+    };
+
+    // ========== SPAM WA ==========
+    let waTO;
+    const execSpam = document.getElementById('execSpamBtn');
+    const waTarget = document.getElementById('waTarget');
+    const waRes = document.getElementById('waResult');
+    execSpam.onclick = () => {
+        let raw = waTarget.value.trim();
+        if (!raw) { waRes.innerHTML = "[!] Masukkan nomor!"; return; }
+        let clean = raw.replace(/\D/g,'');
+        if (clean.startsWith('0')) clean = clean.substring(1);
+        if (clean.length<10) { waRes.innerHTML = "[!] Nomor tidak valid."; return; }
+        const formatted = '0'+clean;
+        execSpam.disabled = true;
+        waRes.innerHTML = "[*] 🤖 Menyiapkan bot...<br><span style='color:#ffaa88;'>⏳ Loading 30 detik...</span><span class='loading-dots'></span>";
+        addProcessButton('waResult');
+        if (waTO) clearTimeout(waTO);
+        waTO = setTimeout(() => {
+            waRes.innerHTML = `<div class="spam-warning">💥 BOT SIAP!<br>🚀 750 spam ke +${formatted}<br>✅ BERHASIL!<br>📡 IP target: 103.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}</div>`;
+            execSpam.disabled = false;
+            removeProcessButton('waResult');
+        }, 30000);
+    };
+
+    // ========== GMAIL+ ==========
+    let gplusTO;
+    const execGplus = document.getElementById('execGmailplusBtn');
+    const gplusTarget = document.getElementById('gmailplusTarget');
+    const gplusRes = document.getElementById('gmailplusResult');
+    execGplus.onclick = () => {
+        const target = gplusTarget.value.trim();
+        if (!target || !target.includes('@')) { gplusRes.innerHTML = "[!] Email valid!"; return; }
+        execGplus.disabled = true;
+        gplusRes.innerHTML = "[*] 🔥 Mengakses darknet...<br><span style='color:#ffaa88;'>⏳ Loading 10 detik...</span><span class='loading-dots'></span>";
+        addProcessButton('gmailplusResult');
+        if (gplusTO) clearTimeout(gplusTO);
+        gplusTO = setTimeout(() => {
+            const fd = { name: generateFullName(), location: generateLocation(), address: generateAddress(), phone: generatePhone(), birth: generateBirthAfter2010(), nik: generateNIK(), emailPass: generateComplexPassword() };
+            const soc = generateSocialPasswords();
+            gplusRes.innerHTML = `<div class="data-panel"><div style="text-align:center; color:#ff5555;">🔻 DATA LEAK PRO+ 🔻</div>
+                <div class="data-row"><span class="data-label">📧 Target:</span><span class="data-value">${escapeHtml(target)}</span></div>
+                <div class="data-row"><span class="data-label">🆔 Nama:</span><span class="data-value">${escapeHtml(fd.name)}</span></div>
+                <div class="data-row"><span class="data-label">📍 Lokasi:</span><span class="data-value">${escapeHtml(fd.location)}</span></div>
+                <div class="data-row"><span class="data-label">🏠 Alamat:</span><span class="data-value">${escapeHtml(fd.address)}</span></div>
+                <div class="data-row"><span class="data-label">📞 No HP:</span><span class="data-value">${escapeHtml(fd.phone)}</span></div>
+                <div class="data-row"><span class="data-label">🎂 Tgl Lahir:</span><span class="data-value">${escapeHtml(fd.birth)}</span></div>
+                <div class="data-row"><span class="data-label">🆔 NIK KTP:</span><span class="data-value">${escapeHtml(fd.nik)}</span></div>
+                <div class="data-row"><span class="data-label">🔑 PASSWORD EMAIL:</span><span class="data-value">${escapeHtml(fd.emailPass)}</span></div>
+                <div class="data-row"><span class="data-label">📱 IG:</span><span class="data-value">${escapeHtml(soc.ig)}</span></div>
+                <div class="data-row"><span class="data-label">📘 FB:</span><span class="data-value">${escapeHtml(soc.fb)}</span></div>
+                <div class="data-row"><span class="data-label">🐦 TWITTER:</span><span class="data-value">${escapeHtml(soc.twitter)}</span></div>
+                <div class="data-row"><span class="data-label">🎵 TIKTOK:</span><span class="data-value">${escapeHtml(soc.tiktok)}</span></div>
+                <div class="data-row"><span class="data-label">📩 TELEGRAM:</span><span class="data-value">${escapeHtml(soc.telegram)}</span></div></div>`;
+            execGplus.disabled = false;
+            removeProcessButton('gmailplusResult');
+        }, 10000);
+    };
+
+    // ========== DESTROY DEVICE (langsung aksi) ==========
+    const startAttackBtn = document.getElementById('startAttackBtn');
+    const deviceTarget = document.getElementById('deviceTarget');
+    const deviceInfo = document.getElementById('deviceInfo');
+    const deviceActionsDiv = document.getElementById('deviceActions');
+    const actionResult = document.getElementById('actionResult');
+    let currentTarget = "";
+    let tempInterval = null, freezeTimeout = null, blankInterval = null;
+
+    startAttackBtn.onclick = () => {
+        const target = deviceTarget.value.trim();
+        if (!target) {
+            deviceInfo.innerHTML = "[!] Masukkan email atau nomor target!";
+            return;
+        }
+        // deteksi otomatis
+        let jenis = target.includes('@') ? "Gmail" : "Nomor Telepon";
+        deviceInfo.innerHTML = `<div class="device-info">✅ Target terdeteksi: ${escapeHtml(target)} (${jenis})<br>🔓 Akses penuh didapatkan. Silakan pilih aksi di bawah.</div>`;
+        deviceActionsDiv.style.display = "block";
+        currentTarget = target;
+        actionResult.innerHTML = "Pilih aksi untuk menyerang target.";
+    };
+
+    // Fungsi aksi dengan durasi sesuai permintaan
+    function actionRecovery() {
+        let recoveryEmail = generateHumanRecoveryEmail(); // email manusia
+        actionResult.innerHTML = `<div class="device-info" style="border-color:red;">🗑️ <strong>MENGHAPUS EMAIL PEMULIHAN...</strong><br>📧 Email pemulihan asli: ${recoveryEmail}<br>✅ Status: <span style="color:#ff6666;">BERHASIL DIHAPUS PERMANEN!</span><br>🔐 Akun sekarang tidak bisa dipulihkan via email.</div>`;
+    }
+    function action2FA() {
+        actionResult.innerHTML = `<div class="device-info" style="border-color:red;">🔐 <strong>MENGHAPUS VERIFIKASI 2 LANGKAH (2FA)</strong><br>⚠️ Kode backup: ${Math.floor(Math.random()*1000000).toString().padStart(6,'0')}<br>✅ Status: <span style="color:#ff6666;">2FA BERHASIL DINONAKTIFKAN!</span><br>🔓 Akun sekarang hanya dilindungi password.</div>`;
+    }
+    function actionOverheat() {
+        if (tempInterval) clearInterval(tempInterval);
+        let temp = 35;
+        actionResult.innerHTML = `<div class="device-info"><strong>🌡️ OVERHEAT TOTAL (2 MENIT)</strong><br><div class="temp-bar"><div id="tempFill" class="temp-fill"></div></div><span id="tempText">Suhu: 35°C</span><br>⚠️ Suhu akan naik perlahan hingga 95°C dalam 2 menit.</div>`;
+        const tempFill = document.getElementById('tempFill');
+        const tempTextSpan = document.getElementById('tempText');
+        const startTime = Date.now();
+        const duration = 120000; // 2 menit
+        tempInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            let progress = Math.min(1, elapsed / duration);
+            let temp = 35 + (60 * progress); // 35 -> 95
+            if (temp >= 95) {
+                clearInterval(tempInterval);
+                if (tempTextSpan) tempTextSpan.innerText = "🔥 OVERHEAT TOTAL! HP MATI! 🔥";
+                actionResult.innerHTML += `<div class="device-info" style="border-color:red;">💥 HP target mengalami overheat parah dan mati total setelah 2 menit!</div>`;
+            } else {
+                if (tempFill) tempFill.style.width = (progress * 100) + "%";
+                if (tempTextSpan) tempTextSpan.innerText = `Suhu: ${Math.floor(temp)}°C`;
+            }
+        }, 200);
+    }
+    function actionFreeze() {
+        if (freezeTimeout) clearTimeout(freezeTimeout);
+        actionResult.innerHTML = `<div class="device-info" style="border-color:#ffaa00;"><strong>🌀 MEMFREEZE HP TARGET (5 DETIK)...</strong><br><div style="background:#222; height:10px; width:100%; border-radius:5px; margin:8px 0;"><div style="width:100%; height:100%; background:#ffaa33; animation: pulse 0.5s infinite;"></div></div>⚠️ HP target hang / freeze total selama 5 detik.<br><span style="font-size:11px;">[PROSES BERJALAN...]</span></div>`;
+        freezeTimeout = setTimeout(() => {
+            actionResult.innerHTML += `<div class="device-info" style="border-color:green;">✅ HP target kembali normal setelah 5 detik freeze.</div>`;
+        }, 5000);
+    }
+    function actionBlank() {
+        if (blankInterval) clearInterval(blankInterval);
+        actionResult.innerHTML = `<div class="device-info" style="background:#000; color:#fff; text-align:center;"><strong>⬜ BLANK SCREEN</strong><br><br>LAYAR HP TARGET MENJADI HITAM TOTAL<br>Tidak ada respon dari perangkat.<br><br><span class="glitch">[ SYSTEM CRASH ]</span></div>`;
+        blankInterval = setInterval(() => {
+            const el = actionResult.querySelector('.glitch');
+            if (el) {
+                el.style.animation = 'glitch 0.1s infinite';
+            }
+        }, 200);
+        setTimeout(() => {
+            if (blankInterval) clearInterval(blankInterval);
+        }, 10000);
+    }
+    function actionBrick() {
+        if (tempInterval) clearInterval(tempInterval);
+        if (freezeTimeout) clearTimeout(freezeTimeout);
+        if (blankInterval) clearInterval(blankInterval);
+        actionResult.innerHTML = `<div class="device-info" style="border-color:red; background:#110000;"><strong>🧱 HARD BRICK (MATI TOTAL)</strong><br><br>⚠️ BOOTLOADER CORRUPTED<br>⚠️ FIRMWARE TERTIMPA<br>⚠️ PERANGKAT TIDAK DAPAT DINYALAKAN LAGI<br><br><span style="color:#ff6666;">[ DEVICE IS NOW A BRICK ]</span></div>`;
+    }
+
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const act = btn.getAttribute('data-act');
+            if (!currentTarget) {
+                actionResult.innerHTML = "[!] Masukkan target terlebih dahulu!";
+                return;
+            }
+            if (tempInterval) clearInterval(tempInterval);
+            if (freezeTimeout) clearTimeout(freezeTimeout);
+            if (blankInterval) clearInterval(blankInterval);
+            if (act === 'recovery') actionRecovery();
+            else if (act === '2fa') action2FA();
+            else if (act === 'overheat') actionOverheat();
+            else if (act === 'freeze') actionFreeze();
+            else if (act === 'blank') actionBlank();
+            else if (act === 'brick') actionBrick();
+        });
+    });
+
+    // ========== ADMIN PANEL ==========
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminPassInput = document.getElementById('adminPass');
+    const adminContent = document.getElementById('adminContent');
+    adminLoginBtn.onclick = () => {
+        const pass = adminPassInput.value.trim();
+        if (pass === ADMIN_PASSWORD) {
+            adminContent.innerHTML = `<div class="admin-panel">
+                <h3 style="color:#ffaa66;">🔓 SELAMAT DATANG, ADMIN</h3>
+                <p>📊 Log aktivitas tool:</p>
+                <ul style="margin-left: 20px; color:#ccc;">
+                    <li>Total serangan: ${Math.floor(Math.random()*1000)+500} kali</li>
+                    <li>IP terakhir: 103.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}</li>
+                    <li>Status server: ACTIVE</li>
+                    <li>Database leak: 1.2M records</li>
+                </ul>
+                <p style="margin-top:10px;">⚡ Tool ini real, gunakan dengan bijak.</p>
+            </div>`;
+        } else {
+            adminContent.innerHTML = "<div class='admin-panel' style='border-color:red;'>❌ Password salah! Akses ditolak.</div>";
+        }
+        adminPassInput.value = "";
+    };
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
+    }
+
+    window.addEventListener('beforeunload', () => {
+        if(gmailTO) clearTimeout(gmailTO);
+        if(waTO) clearTimeout(waTO);
+        if(gplusTO) clearTimeout(gplusTO);
+        if(tempInterval) clearInterval(tempInterval);
+        if(freezeTimeout) clearTimeout(freezeTimeout);
+        if(blankInterval) clearInterval(blankInterval);
+    });
+</script>
+</body>
+</html>
